@@ -19,18 +19,16 @@ class Task(models.Model):
 
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     deadline = models.DateTimeField(null=True, blank=True)
-
     state = models.CharField(
         max_length=15,
         choices=state_choices,
         default='open',
     )
-
     priority = models.CharField(
         max_length=10,
         choices=priority_choices,
@@ -41,4 +39,4 @@ class Task(models.Model):
         ordering = ['-created_at']
 
     def __str__(self):
-        return self.name
+        return self.title
