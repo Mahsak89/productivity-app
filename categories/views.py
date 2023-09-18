@@ -1,8 +1,10 @@
+from django.http import Http404
 from rest_framework import status, permissions
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Category
 from .serializers import CategorySerializer
+from productivity_app.permissions import IsOwnerOrReadOnly
 
 
 class CategoryList(APIView):
@@ -30,3 +32,23 @@ class CategoryList(APIView):
         return Response(
             serializer.errors, status=status.HTTP_400_BAD_REQUEST
         )
+
+
+class CategoryDetail(APIView):
+    permission_classes = [IsOwnerOrReadOnly]
+    serializer_class = CategorySerializer
+
+    def get_object(self, pk):
+        try:
+            category = Category.objects.get(pk=pk)
+            self.check_object_permissions(self.request, category)
+            return category
+        except Category.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        category = self.get_object(pk)
+        serializer = CategorySerializer(
+            category, context={'request': request}
+        )
+        return Response(serializer.data)
