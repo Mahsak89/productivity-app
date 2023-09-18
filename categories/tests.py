@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.test import APITestCase
 
 
-class PostListViewTests(APITestCase):
+class CategoryListViewTests(APITestCase):
     def setUp(self):
         User.objects.create_user(username='flip', password='pass')
 
