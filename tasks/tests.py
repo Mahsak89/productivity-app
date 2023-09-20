@@ -68,3 +68,43 @@ class TaskDetailViewTests(APITestCase):
     def test_cant_retrieve_task_using_invalid_id(self):
         response = self.client.get('/tasks/999/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_can_update_own_task(self):
+        self.client.login(username='flip', password='pass')
+        response = self.client.put('/tasks/1/', {
+            'owner': self.user.id,
+            'category': self.category.id,
+            'title': 'Updated Task',
+            'description': 'Updated description',
+            'deadline': '2023-09-30T12:00:00Z',
+            'state': 'Open',
+            'priority': 'Medium'
+        })
+        self.task.refresh_from_db()
+        self.assertEqual(self.task.title, 'Updated Task')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_cant_update_another_users_task(self):
+        suzi = User.objects.create_user(username='suzi', password='pass')
+        category_suzi = Category.objects.create(
+            owner=suzi, name='Another Category')
+        task_suzi = Task.objects.create(
+            owner=suzi,
+            category=category_suzi,
+            title='Another Task',
+            description='Description of another task',
+            deadline='2023-09-30T12:00:00Z',
+            state='Open',
+            priority='Medium'
+        )
+        self.client.login(username='flip', password='pass')
+        response = self.client.put(f'/tasks/{task_suzi.id}/', {
+            'owner': suzi.id,
+            'category': category_suzi.id,
+            'title': 'Updated Task',
+            'description': 'Updated description',
+            'deadline': '2023-09-30T12:00:00Z',
+            'state': 'Open',
+            'priority': 'Medium'
+        })
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
