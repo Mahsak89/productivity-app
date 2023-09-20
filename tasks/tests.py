@@ -16,3 +16,18 @@ class TaskListViewTests(APITestCase):
         response = self.client.get('/tasks/')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(len(response.data), 1)
+
+    def test_logged_in_user_can_create_task(self):
+        self.client.login(username='flip', password='pass')
+        response = self.client.post('/tasks/', {
+            'owner': self.user.id,
+            'category': self.category.id,
+            'title': 'A Task',
+            'description': 'Description of the task',
+            'deadline': '2023-09-30T12:00:00Z',
+            'state': 'Open',
+            'priority': 'Medium'
+        })
+        count = Task.objects.count()
+        self.assertEqual(count, 1)
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
