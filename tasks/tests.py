@@ -43,3 +43,24 @@ class TaskListViewTests(APITestCase):
             'priority': 'Medium'
         })
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+
+class TaskDetailViewTests(APITestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(username='flip', password='pass')
+        self.category = Category.objects.create(
+            owner=self.user, name='Test Category')
+        self.task = Task.objects.create(
+            owner=self.user,
+            category=self.category,
+            title='A Task',
+            description='Description of the task',
+            deadline='2023-09-30T12:00:00Z',
+            state='Open',
+            priority='Medium'
+        )
+
+    def test_can_retrieve_task_using_valid_id(self):
+        response = self.client.get('/tasks/1/')
+        self.assertEqual(response.data['title'], 'A Task')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
