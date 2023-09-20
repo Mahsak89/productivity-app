@@ -108,3 +108,29 @@ class TaskDetailViewTests(APITestCase):
             'priority': 'Medium'
         })
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
+    def test_user_can_delete_own_task(self):
+        self.client.login(username='flip', password='pass')
+        response = self.client.delete('/tasks/1/')
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+        count = Task.objects.count()
+        self.assertEqual(count, 0)
+
+    def test_user_cant_delete_another_users_task(self):
+        suzi = User.objects.create_user(username='suzi', password='pass')
+        category_suzi = Category.objects.create(
+            owner=suzi, name='Another Category')
+        task_suzi = Task.objects.create(
+            owner=suzi,
+            category=category_suzi,
+            title='Another Task',
+            description='Description of another task',
+            deadline='2023-09-30T12:00:00Z',
+            state='Open',
+            priority='Medium'
+        )
+        self.client.login(username='flip', password='pass')
+        response = self.client.delete(f'/tasks/{task_suzi.id}/')
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+        count = Task.objects.count()
+        self.assertEqual(count, 2)
