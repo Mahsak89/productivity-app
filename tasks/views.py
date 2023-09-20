@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from productivity_app.permissions import IsOwnerOrReadOnly
 from .models import Task
 from .serializers import TaskSerializer, TaskDetailSerializer
@@ -12,6 +13,28 @@ class TaskList(generics.ListCreateAPIView):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = TaskSerializer
     queryset = Task.objects.all()
+
+    filter_backends = [
+        DjangoFilterBackend,  # Use Django filters
+        filters.OrderingFilter,
+        filters.SearchFilter,
+    ]
+    filterset_fields = [
+        'category',
+        'priority',
+        'deadline',
+        'created_at',
+        'state',
+    ]
+    search_fields = [
+        'category__name',
+    ]
+    ordering_fields = [
+        'priority',
+        'deadline',
+        'created_at',
+        'category',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
