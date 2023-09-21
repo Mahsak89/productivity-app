@@ -24,6 +24,7 @@ class TaskList(generics.ListCreateAPIView):
         'priority',
         'deadline',
         'created_at',
+        'startdate',
         'state',
     ]
     search_fields = [
@@ -34,6 +35,7 @@ class TaskList(generics.ListCreateAPIView):
         'deadline',
         'created_at',
         'category',
+        'startdate',
     ]
 
     def perform_create(self, serializer):
