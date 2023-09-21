@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import date
 from categories.models import Category
 from django.contrib.auth.models import User
 
@@ -23,6 +24,7 @@ class Task(models.Model):
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    startdate = models.DateField(default=date.today)
     deadline = models.DateTimeField(null=True, blank=True)
     state = models.CharField(
         max_length=15,
