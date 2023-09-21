@@ -24,3 +24,20 @@ class ProfileDetailViewTests(APITestCase):
     def test_cant_retrieve_profile_using_invalid_id(self):
         response = self.client.get('/profiles/999/')
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+
+    def test_user_can_update_own_profile(self):
+        user = User.objects.create_user(username='flip', password='pass')
+        self.client.login(username='flip', password='pass')
+        response = self.client.put(
+            f'/profiles/{user.id}/', {'name': 'Updated Profile'})
+        profile = Profile.objects.get(owner=user)
+        self.assertEqual(profile.name, 'Updated Profile')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_user_cant_update_another_users_profile(self):
+        user1 = User.objects.create_user(username='flip', password='pass')
+        user2 = User.objects.create_user(username='suzi', password='pass')
+        self.client.login(username='flip', password='pass')
+        response = self.client.put(
+            f'/profiles/{user2.id}/', {'name': 'Updated Profile'})
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
