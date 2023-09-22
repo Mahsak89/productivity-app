@@ -1,4 +1,5 @@
-from rest_framework import generics, permissions
+from rest_framework import generics, permissions, filters
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Category
 from .serializers import CategorySerializer
 from productivity_app.permissions import IsOwnerOrReadOnly
@@ -11,6 +12,15 @@ class CategoryList(generics.ListCreateAPIView):
     ]
 
     queryset = Category.objects.all()
+
+    filter_backends = [
+        DjangoFilterBackend,  # Use Django filters
+
+    ]
+    filterset_fields = [
+        'owner',
+        'owner__id',
+    ]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
