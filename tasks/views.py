@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import generics, permissions, filters
 from django_filters.rest_framework import DjangoFilterBackend
 from productivity_app.permissions import IsOwnerOrReadOnly
@@ -12,7 +13,9 @@ class TaskList(generics.ListCreateAPIView):
 
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     serializer_class = TaskSerializer
-    queryset = Task.objects.all()
+    queryset = Task.objects.annotate(
+        states_count=Count('states', distinct=True)
+    ).order_by('-created_at')
 
     filter_backends = [
         DjangoFilterBackend,  # Use Django filters
@@ -25,7 +28,9 @@ class TaskList(generics.ListCreateAPIView):
         'deadline',
         'created_at',
         'startdate',
-        'state',
+
+
+
     ]
     search_fields = [
         'category__name',
@@ -36,6 +41,8 @@ class TaskList(generics.ListCreateAPIView):
         'created_at',
         'category',
         'startdate',
+        'states_count',
+        'states__created_at',
     ]
 
     def perform_create(self, serializer):
