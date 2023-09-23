@@ -5,12 +5,7 @@ from django.contrib.auth.models import User
 
 
 class Task(models.Model):
-    # Define choices for task state
-    state_choices = [
-        ('Open', 'Open'),
-        ('In Progress', 'In Progress'),
-        ('Done', 'Done'),
-    ]
+
     # Define choices for task priority
     priority_choices = [
         ('Low', 'Low'),
@@ -27,11 +22,7 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     startdate = models.DateField(default=date.today)
     deadline = models.DateTimeField(null=True, blank=True)
-    state = models.CharField(
-        max_length=15,
-        choices=state_choices,
-        default='open',
-    )
+
     priority = models.CharField(
         max_length=10,
         choices=priority_choices,
