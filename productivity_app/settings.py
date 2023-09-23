@@ -93,7 +93,8 @@ INSTALLED_APPS = [
     'profiles',
     'categories',
     'tasks',
-    
+    'states',
+
 
 
 ]
