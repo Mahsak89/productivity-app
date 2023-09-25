@@ -45,8 +45,9 @@ Here is an API provided by DJANGO REST FRAMWORK, so that users can   make a task
 * Delete
 * Retrieve
 
+### ***FILTERING***
 
-
+for post profile and category
 
 ## Data Model
 
