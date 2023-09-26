@@ -23,7 +23,8 @@ class TaskList(generics.ListCreateAPIView):
         filters.SearchFilter,
     ]
     filterset_fields = [
-        'owner',
+        'states__owner__profile',
+        'owner__profile',
         'category',
         'priority',
         'deadline',
