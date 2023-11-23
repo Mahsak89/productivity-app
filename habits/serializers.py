@@ -14,3 +14,9 @@ class HabitSerializer(serializers.ModelSerializer):
     class Meta:
         model = Habit
         fields = '__all__'
+
+    def validate_tracking_period(self, value):
+        if value <= 0:
+            raise serializers.ValidationError(
+                "Tracking period must be a positive integer.")
+        return value
