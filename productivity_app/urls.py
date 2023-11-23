@@ -30,5 +30,6 @@ urlpatterns = [
     path('', include('categories.urls')),
     path('', include('tasks.urls')),
     path('', include('states.urls')),
+    path('', include('habits.urls')),
 
 ]
