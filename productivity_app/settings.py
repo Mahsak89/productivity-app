@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     'tasks',
     'states',
     'habits',
+    'habit_tracker',
 
 
 

@@ -8,3 +8,4 @@ class Habit(models.Model):
     description = models.TextField()
     tracking_period = models.PositiveIntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
+  
