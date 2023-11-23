@@ -61,12 +61,97 @@ for post profile and category
 ---
 
 I decided to create 4 different app to build my task to do API other than the user which is created by default.
+I updated this drf and added 2 more modal (habits and habit_tracker)
 
 ## Testing
 
 ---
 
-I have manually tested the project by doing the following :
+I have manually tested the project by doing the following 
+  
+- profile :
+not found the user :
+
+![Image](image/drf/profilestest/404notfound.png)
+can delete and edit if log in:
+
+![Image](image/drf/profilestest/candeleteandeditiflogin.png)
+
+it would not show the create form when not log in
+
+![Image](image/drf/profilestest/3.png)
+
+no change is allowed when not  log in:
+
+![Image](image/drf/profilestest/4.png)
+
+there is no form to creat if not log in
+
+![Image](image/drf/profilestest/5.png)
+
+there is no form to edit when the user fetch a profile id and not the owner
+
+![Image](image/drf/profilestest/6.png)
+
+updated when login:
+
+![Image](image/drf/profilestest/7.png)
+
+users can update their own profile
+
+![Image](image/drf/profilestest/8.png)
+
+valid edition
+
+![Image](image/drf/profilestest/9.png)
+
+when not login there is no editing form:
+
+![Image](image/drf/profilestest/10.png)
+
+- habit and habit tracker:
+    habit list:
+    ![Image](image/drf/profilestest/11.png)
+    
+    habit detailed list:
+
+    ![Image](image/drf/profilestest/12.png)
+
+    handeling wrong input period tracker:
+
+    ![Image](image/drf/profilestest/13.png)
+
+    loged in habitcompletation:
+
+    ![Image](image/drf/profilestest/14.png)
+
+    log out in habitcompletation detail list
+
+    ![Image](image/drf/profilestest/15.png)
+
+    log out in habitcompletation list:
+
+    ![Image](image/drf/profilestest/16.png)
+    
+    validate start date and deadline time picking:
+    
+    ![Image](image/drf/profilestest/17.png)
+
+    is owner is false when not lot login:
+
+    ![Image](image/drf/profilestest/20.png)
+    
+    
+
+
+    
+
+
+
+
+
+
+
 
 - Passed the code through a PEP8 linter and confirmed that there are no problems
 - Tested my code with invalid and valid inputs: to check both errors and permissions
