@@ -1,7 +1,9 @@
 from django.contrib.humanize.templatetags.humanize import naturaltime
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 from .models import Task
 from states.models import State
+import datetime
 
 
 class TaskSerializer(serializers.ModelSerializer):
@@ -32,6 +34,31 @@ class TaskSerializer(serializers.ModelSerializer):
 
     def get_updated_at(self, obj):
         return naturaltime(obj.updated_at)
+
+    def validate(self, data):
+        """
+        Custom validation to check if deadline is not set before startdate.
+        """
+        startdate = data.get('startdate')
+        deadline = data.get('deadline')
+
+        if startdate and deadline:
+            # Ensure startdate is a datetime object
+            if isinstance(startdate, datetime.date):
+                startdate = datetime.datetime.combine(
+                    startdate, datetime.datetime.min.time())
+
+            # Ensure deadline is a datetime object
+            if isinstance(deadline, datetime.date):
+                deadline = datetime.datetime.combine(
+                    deadline, datetime.datetime.min.time())
+
+            # Compare the corrected objects
+            if deadline < startdate:
+                raise serializers.ValidationError(
+                    "Deadline cannot be set before the start date.")
+
+        return data
 
     class Meta:
         model = Task
