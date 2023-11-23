@@ -52,7 +52,7 @@ Here is an API provided by DJANGO REST FRAMWORK, so that users can make a task t
 
 ### **_FILTERING_**
 
-for post profile and category
+for post profile and category and also added a filtering for habits base on user and habit id
 
 ## Data Model
 
