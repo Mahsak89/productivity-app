@@ -31,5 +31,6 @@ urlpatterns = [
     path('', include('tasks.urls')),
     path('', include('states.urls')),
     path('', include('habits.urls')),
+    path('', include('habit_tracker.urls')),
 
 ]
