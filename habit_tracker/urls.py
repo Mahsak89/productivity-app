@@ -1,7 +1,10 @@
 from django.urls import path
-from .views import HabitCompletionList
+
+from habit_tracker import views
 
 urlpatterns = [
-    path('habit-completions/', HabitCompletionList.as_view(),
-         name='habit-completions'),
+
+    path('habit-completions/', views.HabitCompletionList.as_view()),
+    path('habit-completions/<int:pk>/', views.HabitCompletionDetail.as_view()),
+
 ]
