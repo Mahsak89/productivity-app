@@ -65,7 +65,7 @@ DEBUG = 'DEV' in os.environ
 ALLOWED_HOSTS = [
     os.environ.get('ALLOWED_HOST'),
     'localhost',
-    '8000-mahsak89-productivity-ap-ykhqzoie1i.us2.codeanyapp.com'
+    '8000-mahsak89-productivity-ap-hqu9pmfcjp.us2.codeanyapp.com'
 ]
 
 
