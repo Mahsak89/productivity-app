@@ -69,14 +69,55 @@ I updated this drf and added 2 more modal (habits and habit_tracker)
 
 I have manually tested the project by doing the following 
   
-- profile :
-not found the user :
 
-![Image](image/drf/profilestest/404notfound.png)
+- task:
+  
+there is no form to edit when the user fetch a profile id and not the owner
+
+![Image](image/drf/profilestest/6.png)
+
 can delete and edit if log in:
 
 ![Image](image/drf/profilestest/candeleteandeditiflogin.png)
 
+ validate start date and deadline time picking:
+
+![Image](image/drf/profilestest/17.png)
+
+
+there is no form to creat if not log in
+
+![Image](image/drf/profilestest/5.png)
+
+
+
+- profile :
+  
+ is owner is false when not lot login:
+
+![Image](image/drf/profilestest/20.png)
+
+valid  profile pic
+
+![Image](image/drf/profilestest/9.png)
+
+  
+
+
+  
+not found the user :
+
+![Image](image/drf/profilestest/404notfound.png)
+
+
+users can update their own profile
+
+![Image](image/drf/profilestest/8.png)
+
+
+
+- categories:
+  
 it would not show the create form when not log in
 
 ![Image](image/drf/profilestest/3.png)
@@ -85,31 +126,21 @@ no change is allowed when not  log in:
 
 ![Image](image/drf/profilestest/4.png)
 
-there is no form to creat if not log in
 
-![Image](image/drf/profilestest/5.png)
 
-there is no form to edit when the user fetch a profile id and not the owner
-
-![Image](image/drf/profilestest/6.png)
 
 updated when login:
 
 ![Image](image/drf/profilestest/7.png)
 
-users can update their own profile
 
-![Image](image/drf/profilestest/8.png)
-
-valid edition
-
-![Image](image/drf/profilestest/9.png)
 
 when not login there is no editing form:
 
 ![Image](image/drf/profilestest/10.png)
 
 - habit and habit tracker:
+  
     habit list:
     ![Image](image/drf/profilestest/11.png)
     
@@ -133,14 +164,8 @@ when not login there is no editing form:
 
     ![Image](image/drf/profilestest/16.png)
     
-    validate start date and deadline time picking:
-    
-    ![Image](image/drf/profilestest/17.png)
-
-    is owner is false when not lot login:
-
-    ![Image](image/drf/profilestest/20.png)
-    
+   
+   
     
 
 
