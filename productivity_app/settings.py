@@ -97,6 +97,7 @@ INSTALLED_APPS = [
     'habits',
     'habit_tracker',
     'tags',
+    'labels',
 
 
 
