@@ -65,10 +65,11 @@ class TaskSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'owner', 'is_owner', 'profile_id', 'category',
             'title', 'description', 'created_at', 'updated_at', 'startdate',
-            'deadline', 'priority', 'state_id', 'states_count'
+            'deadline', 'priority', 'state_id', 'states_count', 'tag'
         ]
 
 
 class TaskDetailSerializer(TaskSerializer):
 
     category = serializers.ReadOnlyField(source='category.id')
+    tag = serializers.ReadOnlyField(source='tag.id')

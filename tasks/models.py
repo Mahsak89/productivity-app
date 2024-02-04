@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from categories.models import Category
 from django.contrib.auth.models import User
+from tags.models import Tag
 
 
 class Task(models.Model):
@@ -15,6 +16,8 @@ class Task(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ForeignKey(
         Category, on_delete=models.CASCADE, blank=True, null=True)
+    tag = models.ForeignKey(
+        Tag, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
