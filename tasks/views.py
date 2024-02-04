@@ -30,19 +30,19 @@ class TaskList(generics.ListCreateAPIView):
         'deadline',
         'created_at',
         'startdate',
-        'tag',
+       
 
 
 
     ]
     search_fields = [
         'category__name',
-        'tag__name',
+       
     ]
     ordering_fields = [
         'priority',
         'deadline',
-        'tag',
+      
         'created_at',
         'category',
         'startdate',
