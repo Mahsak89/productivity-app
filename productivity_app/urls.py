@@ -32,6 +32,7 @@ urlpatterns = [
     path('', include('states.urls')),
     path('', include('habits.urls')),
     path('', include('habit_tracker.urls')),
+    path('', include('labels.urls')),
     path('', include('tags.urls')),
 
 ]
