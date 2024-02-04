@@ -6,7 +6,6 @@ from django.contrib.auth.models import User
 
 class Task(models.Model):
 
-    # Define choices for task priority
     priority_choices = [
         ('Low', 'Low'),
         ('Medium', 'Medium'),
@@ -22,7 +21,6 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     startdate = models.DateField(default=date.today)
     deadline = models.DateTimeField(null=True, blank=True)
-
     priority = models.CharField(
         max_length=10,
         choices=priority_choices,

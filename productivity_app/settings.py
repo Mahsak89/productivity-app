@@ -96,6 +96,7 @@ INSTALLED_APPS = [
     'states',
     'habits',
     'habit_tracker',
+    'tags',
 
 
 
