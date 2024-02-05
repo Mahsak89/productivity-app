@@ -58,6 +58,11 @@ for post profile and category and also added a filtering for habits base on user
 
 ![Image](image/erd.png)
 
+- updated :
+
+![Image](image/diagram.png)
+
+
 ---
 
 I decided to create 4 different app to build my task to do API other than the user which is created by default.
