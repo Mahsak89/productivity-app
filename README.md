@@ -61,7 +61,7 @@ for post profile and category and also added a filtering for habits base on user
 ---
 
 I decided to create 4 different app to build my task to do API other than the user which is created by default.
-I updated this drf and added 2 more modal (habits and habit_tracker)
+I UPdated  this drf and added 2 more modals as needed  (habits and habit_tracker) and i .fix the error of accepting sooner date in deadline than the start date.
 
 ## Testing
 
